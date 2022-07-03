@@ -22,6 +22,13 @@
     * Using Voice
         * It will take clip of target audio and process it to predict the result.
 
+---
+### **UI** 🎇 
+
+**Flutter App UI**
+![App](./Assets/UI/App-front-page.png)
+
+---
  ### 📍 Data Souce
  **Data for the notebook is taken form kaggle platform**. 
  
