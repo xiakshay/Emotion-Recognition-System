@@ -16,6 +16,12 @@
     * Frontend using Dart
 ```
 
+### Methods
+    * Using Image
+        * it will take image of target and process the image. 
+    * Using Voice
+        * It will take clip of target audio and process it to predict the result.
+
  ### 📍 Data Souce
  **Data for the notebook is taken form kaggle platform**. 
  
