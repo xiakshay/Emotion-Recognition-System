@@ -14,3 +14,16 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+---
+
+## **Welcome to  my flutter application**
+
+This project is about recognition system. User will able to recognize emotions.
+
+
+---
+
+Feel free to share your thoughts.
+
+⭐ **Thank You** ⭐ 
