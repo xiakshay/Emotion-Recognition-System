@@ -28,6 +28,8 @@
 **Flutter App UI**
 ![App](./Assets/UI/App-front-page.png)
 
+Sample Flutter app is ready need to make it more correct
+
 ---
  ### 📍 Data Souce
  **Data for the notebook is taken form kaggle platform**. 
