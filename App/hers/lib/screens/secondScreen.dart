@@ -12,9 +12,12 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<SecondScreen> {
+  int cam = 0;
   CameraImage? cameraImage;
   CameraController? cameraController;
-  String output = '';
+  String output = 'hello this is output';
+
+  get child => null;
 
   @override
   void initState() {
@@ -24,7 +27,7 @@ class _HomeState extends State<SecondScreen> {
   }
 
   loadCamera() {
-    cameraController = CameraController(cameras![0], ResolutionPreset.medium);
+    cameraController = CameraController(cameras![cam], ResolutionPreset.medium);
     cameraController!.initialize().then((value) {
       if (!mounted) {
         return;
@@ -57,6 +60,7 @@ class _HomeState extends State<SecondScreen> {
       predictions!.forEach((element) {
         setState(() {
           output = element['label'];
+          build(context);
         });
       });
     }
@@ -74,10 +78,31 @@ class _HomeState extends State<SecondScreen> {
         title: const Text('Recognition using Camera'),
       ),
       body: Column(children: [
+        const Text('Bring your face here'),
+        Align(
+          alignment: Alignment.topRight,
+          child: SizedBox(
+            height: 25.0,
+            width: 45.0,
+            child: ElevatedButton(
+              onPressed: () {
+                if (cam == 1) {
+                  cam = 0;
+                } else {
+                  cam = 1;
+                }
+                loadCamera();
+              },
+              child: const Text(
+                '🔄',
+              ),
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(20),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: !cameraController!.value.isInitialized
                 ? Container()
@@ -87,10 +112,22 @@ class _HomeState extends State<SecondScreen> {
                   ),
           ),
         ),
-        Text(
-          output,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        )
+        Container(
+          width: 300,
+          height: 70,
+          padding: const EdgeInsets.all(12),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.blueAccent,
+            border: Border.all(color: Colors.red, width: 4.0),
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+          ),
+          child: Text(
+            output,
+            style: const TextStyle(fontSize: 20, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ]),
     );
   }
