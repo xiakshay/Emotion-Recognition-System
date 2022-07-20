@@ -19,7 +19,9 @@ class _HomeState extends State<SecondScreen> {
 
   loadModel() async {
     Tflite.loadModel(
-        model: "assets/model/model.tflite", labels: "assets/model/labels.txt");
+      model: 'assets/model/model.tflite',
+      labels: 'assets/model/labels.txt',
+    );
   }
 
   loadCamera() {

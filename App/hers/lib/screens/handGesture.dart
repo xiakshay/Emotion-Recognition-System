@@ -11,33 +11,34 @@ class HandGesture extends StatefulWidget {
 }
 
 class _HomeState extends State<HandGesture> {
-  int cam = 0;
   CameraImage? cameraImage;
   CameraController? cameraController;
-  String output = '';
+  String answer = '';
 
   loadModel() async {
     Tflite.loadModel(
-        model: "assets/model/model.tflite", labels: "assets/model/labels.txt");
+      model: 'assets/model/handGesture.tflite',
+      labels: 'assets/model/Handlabels.txt',
+    );
   }
 
-  loadCamera() {
-    cameraController = CameraController(cameras![cam], ResolutionPreset.medium);
+  initCamera() {
+    cameraController = CameraController(cameras![0], ResolutionPreset.medium);
     cameraController!.initialize().then((value) {
       if (!mounted) {
         return;
       } else {
         setState(() {
-          cameraController!.startImageStream((imageStream) {
-            cameraImage = imageStream;
-            runModel();
+          cameraController!.startImageStream((image) {
+            cameraImage = image;
+            applyModelonimages();
           });
         });
       }
     });
   }
 
-  runModel() async {
+  applyModelonimages() async {
     if (cameraImage != null) {
       var predictions = await Tflite.runModelOnFrame(
           bytesList: cameraImage!.planes.map((plane) {
@@ -48,21 +49,21 @@ class _HomeState extends State<HandGesture> {
           imageMean: 127.5,
           imageStd: 127.5,
           rotation: 90,
-          numResults: 7,
+          numResults: 3,
           threshold: 0.1,
           asynch: true);
 
-      output = '';
+      answer = '';
 
-      predictions!.forEach((element) {
-        output += element['label'].toString().substring(0, 1).toUpperCase() +
-            element['label'].toString().substring(1) +
+      predictions!.forEach((prediction) {
+        answer += prediction['label'].toString().substring(0, 1).toUpperCase() +
+            prediction['label'].toString().substring(1) +
             " " +
-            (element['confidence'] as double).toStringAsFixed(3) +
+            (prediction['confidence'] as double).toStringAsFixed(3) +
             '\n';
       });
       setState(() {
-        output = output;
+        answer = answer;
       });
     }
   }
@@ -70,76 +71,59 @@ class _HomeState extends State<HandGesture> {
   @override
   void initState() {
     super.initState();
-    loadCamera();
+    initCamera();
     loadModel();
   }
 
   @override
-  void dispose() async {
-    super.dispose();
-
-    await Tflite.close();
-    cameraController!.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Recognition using Camera'),
-      ),
-      body: Column(children: [
-        const Text('Bring your face here'),
-        Align(
-          alignment: Alignment.topRight,
-          child: SizedBox(
-            height: 25.0,
-            width: 45.0,
-            child: ElevatedButton(
-              onPressed: () {
-                if (cam == 1) {
-                  cam = 0;
-                } else {
-                  cam = 1;
-                }
-                loadCamera();
-              },
-              child: const Text(
-                '🔄',
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.6,
-            width: MediaQuery.of(context).size.width,
-            child: !cameraController!.value.isInitialized
-                ? Container()
-                : AspectRatio(
-                    aspectRatio: cameraController!.value.aspectRatio,
-                    child: CameraPreview(cameraController!),
+    return MaterialApp(
+      theme:
+          ThemeData(brightness: Brightness.dark, primaryColor: Colors.purple),
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(
+          child: Scaffold(
+        body: cameraImage != null
+            ? Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.blue,
+                child: Stack(children: [
+                  Positioned(
+                    child: Center(
+                        child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: AspectRatio(
+                          aspectRatio: cameraController!.value.aspectRatio,
+                          child: CameraPreview(
+                            cameraController!,
+                          )),
+                    )),
                   ),
-          ),
-        ),
-        Container(
-          width: 300,
-          height: 70,
-          padding: const EdgeInsets.all(12),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Colors.blueAccent,
-            border: Border.all(color: Colors.red, width: 4.0),
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          ),
-          child: Text(
-            output,
-            style: const TextStyle(fontSize: 20, color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ]),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        color: Colors.black87,
+                        child: Center(
+                          child: Text(
+                            answer,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ]),
+              )
+            : Container(),
+      )),
     );
   }
 }
