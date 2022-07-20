@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hers/screens/handGesture.dart';
 import 'package:hers/screens/secondScreen.dart';
 import 'package:hers/screens/thirdScreen.dart';
 
@@ -28,6 +29,25 @@ class FirstScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'Second Screen',
+                    style: TextStyle(
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(20),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HandGesture()));
+                  },
+                  child: const Text(
+                    'Hand Gesture',
                     style: TextStyle(
                       fontSize: 10,
                     ),
