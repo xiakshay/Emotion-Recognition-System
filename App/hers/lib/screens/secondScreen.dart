@@ -15,15 +15,11 @@ class _HomeState extends State<SecondScreen> {
   int cam = 0;
   CameraImage? cameraImage;
   CameraController? cameraController;
-  String output = 'hello this is output';
+  String output = '';
 
-  get child => null;
-
-  @override
-  void initState() {
-    super.initState();
-    loadCamera();
-    loadModel();
+  loadModel() async {
+    Tflite.loadModel(
+        model: "assets/model/model.tflite", labels: "assets/model/labels.txt");
   }
 
   loadCamera() {
@@ -53,22 +49,38 @@ class _HomeState extends State<SecondScreen> {
           imageMean: 127.5,
           imageStd: 127.5,
           rotation: 90,
-          numResults: 2,
+          numResults: 7,
           threshold: 0.1,
           asynch: true);
 
+      output = '';
+
       predictions!.forEach((element) {
-        setState(() {
-          output = element['label'];
-          build(context);
-        });
+        output += element['label'].toString().substring(0, 1).toUpperCase() +
+            element['label'].toString().substring(1) +
+            " " +
+            (element['confidence'] as double).toStringAsFixed(3) +
+            '\n';
+      });
+      setState(() {
+        output = output;
       });
     }
   }
 
-  loadModel() async {
-    await Tflite.loadModel(
-        model: "assets/model/model.tflite", labels: "assets/model/labels.txt");
+  @override
+  void initState() {
+    super.initState();
+    loadCamera();
+    loadModel();
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+
+    await Tflite.close();
+    cameraController!.dispose();
   }
 
   @override
