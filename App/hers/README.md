@@ -28,6 +28,16 @@ $ flutter pub add flutter_launcher_icons
 $ flutter pub get
 $ flutter pub run flutter_launcher_icons:main
 ```
+
+### Add this to `pubsec.yaml`
+
+```
+flutter_icons:
+  image_path: "assets/images/fcicon.png"
+  android: true
+  ios: true
+
+```
 ---
 
 Feel free to share your thoughts.
