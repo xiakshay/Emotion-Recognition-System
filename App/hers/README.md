@@ -22,6 +22,12 @@ samples, guidance on mobile development, and a full API reference.
 This project is about recognition system. User will able to recognize emotions.
 
 
+## Change flutter launch icon
+```
+$ flutter pub add flutter_launcher_icons  
+$ flutter pub get
+$ flutter pub run flutter_launcher_icons:main
+```
 ---
 
 Feel free to share your thoughts.
