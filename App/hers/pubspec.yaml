@@ -36,6 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   camera: ^0.9.8+1
   tflite: ^1.1.2
+  flutter_launcher_icons: ^0.9.3
+
+flutter_icons:
+  image_path: "assets/images/fcicon.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
