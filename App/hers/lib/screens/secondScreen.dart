@@ -51,7 +51,7 @@ class _HomeState extends State<SecondScreen> {
           imageMean: 127.5,
           imageStd: 127.5,
           rotation: 90,
-          numResults: 7,
+          numResults: 3,
           threshold: 0.1,
           asynch: true);
 
@@ -61,7 +61,7 @@ class _HomeState extends State<SecondScreen> {
         output += element['label'].toString().substring(0, 1).toUpperCase() +
             element['label'].toString().substring(1) +
             " " +
-            (element['confidence'] as double).toStringAsFixed(3) +
+            (element['confidence'] as double).toStringAsFixed(2) +
             '\n';
       });
       setState(() {
