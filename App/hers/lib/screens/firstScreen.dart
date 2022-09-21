@@ -30,7 +30,7 @@ class _FirstScreen extends State<FirstScreen> {
                 left: 20, right: 20, top: 150, bottom: 80),
             // color: Colors.green,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   "Hello, \nWelcome Back",
@@ -76,11 +76,11 @@ class _FirstScreen extends State<FirstScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     ButtonTheme(
-                      minWidth: double.infinity,
-                      height: 60.0,
+                      minWidth: 120.0,
+                      height: 120.0,
                       child: RaisedButton(
                         onPressed: () {
                           Navigator.push(
@@ -88,10 +88,10 @@ class _FirstScreen extends State<FirstScreen> {
                               MaterialPageRoute(
                                   builder: (context) => const ThirdScreen()));
                         },
-                        color: Color.fromARGB(106, 32, 156, 82),
+                        color: const Color.fromARGB(106, 32, 156, 82),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius: BorderRadius.circular(60)),
                         child: const Text(
                           "About",
                           style: TextStyle(
