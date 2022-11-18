@@ -26,7 +26,10 @@
 ### **UI** 🎇 
 
 **Flutter App UI**
-![App](./Assets/UI/App-front-page.png)
+![App](./Assets/Results/s1.png)
+![App](./Assets/Results/s2.png)
+![App](./Assets/Results/s3.png)
+![App](./Assets/Results/s4.png)
 
 Sample Flutter app is ready need to make it more correct
 
