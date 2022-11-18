@@ -84,9 +84,10 @@ class _FirstScreen extends State<FirstScreen> {
                       child: RaisedButton(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ThirdScreen()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ThirdScreen()),
+                          );
                         },
                         color: const Color.fromARGB(106, 32, 156, 82),
                         elevation: 0,

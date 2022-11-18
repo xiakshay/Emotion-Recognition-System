@@ -19,7 +19,7 @@ class _HomeState extends State<SecondScreen> {
 
   loadModel() async {
     Tflite.loadModel(
-      model: 'assets/model/model.tflite',
+      model: 'assets/model/tmodel.tflite',
       labels: 'assets/model/labels.txt',
     );
   }
@@ -51,7 +51,7 @@ class _HomeState extends State<SecondScreen> {
           imageMean: 127.5,
           imageStd: 127.5,
           rotation: 90,
-          numResults: 3,
+          numResults: 7,
           threshold: 0.1,
           asynch: true);
 
@@ -128,7 +128,7 @@ class _HomeState extends State<SecondScreen> {
         ),
         Container(
           width: 300,
-          height: 70,
+          height: 90,
           padding: const EdgeInsets.all(12),
           alignment: Alignment.center,
           decoration: BoxDecoration(
