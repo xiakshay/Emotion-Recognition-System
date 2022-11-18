@@ -23,9 +23,10 @@
         * It will take clip of target audio and process it to predict the result.
 
 ---
-### **UI** 🎇 
+### **Results** 🎇 
 
-**Flutter App UI**
+**Python Code Results**
+
 ![App](./Assets/Results/s1.png)
 ![App](./Assets/Results/s2.png)
 ![App](./Assets/Results/s3.png)
