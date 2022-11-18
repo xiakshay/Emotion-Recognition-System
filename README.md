@@ -38,7 +38,7 @@ Sample Flutter app is ready need to make it more correct
  ### 📍 Data Souce
  **Data for the notebook is taken form kaggle platform**. 
  
- From the Dataset [Rmotion Recognition Dataset](#)
+ From the Dataset [Emotion Recognition Dataset](https://www.kaggle.com/datasets/ashishpatel26/facial-expression-recognitionferchallenge)
 
 ---
 **Thanks to visit**
